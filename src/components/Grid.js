@@ -10,7 +10,7 @@ import $ from 'jquery';
 
 const synth = new Tone.Synth().toDestination()
 const chordPlayer = new Tone.Synth().toDestination()
-Tone.Transport.bpm.value = 50;
+Tone.Transport.bpm.value = 100;
 
 const IChord1 = ["C3","E3"];
 const IChord2 = ["G3","E3"];
@@ -58,6 +58,11 @@ const Grid = () => {
     const [note16, pushNote16] = useState();
 
     const [chordArray, setChordArray] = useState([]);
+    const [BPM, setBPM] = useState(100);
+    useEffect(()=>{
+        Tone.Transport.bpm.value = BPM/2;
+    }, [BPM])
+
 
     const generateChords = () =>{
         let noteArray = [note1,note2,note3, note4, note5, note6, note7, note8, note9, note10, note11, note12, note13, note14, note15, note16]
@@ -78,28 +83,29 @@ const Grid = () => {
             switch(beat1) {
                 default:
                 case 'C':
-                    randomInt = getRandomInt(5);
-                    if (randomInt==0 || chordArray.length>0 && chordArray[i-1]==="G/B") {
+                    randomInt = getRandomInt(4);
+                    if (chordArray.length>0 && chordArray[i-2]=="G/B") {
                         output.push(IChord1);
                         output.push(IChord2);
                         setChordArray(chordArray=>[...chordArray,"C"])
                         setChordArray(chordArray=>[...chordArray,"C"])
-                    } else if (randomInt===1){
+
+                    } else if (randomInt===0){
                         output.push(viChord1);
                         output.push(viChord2);
                         setChordArray(chordArray=>[...chordArray,"Am"])
                         setChordArray(chordArray=>[...chordArray,"Am"])
-                    } else if (randomInt===2) {
+                    } else if (randomInt===1) {
                         output.push(IVChord1);
                         output.push(IVChord2);
                         setChordArray(chordArray=>[...chordArray,"F"])
                         setChordArray(chordArray=>[...chordArray,"F"])
-                    } else if (randomInt===3) {
+                    } else if (randomInt===2) {
                         output.push(IbChord1);
                         output.push(IbChord2);
                         setChordArray(chordArray=>[...chordArray,"C/E"])
                         setChordArray(chordArray=>[...chordArray,"C/E"])
-                    } else if (randomInt===4) {
+                    } else if (randomInt===3) {
                         output.push(IVbChord1);
                         output.push(IVbChord2);
                         setChordArray(chordArray=>[...chordArray,"F/A"])
@@ -252,7 +258,11 @@ const Grid = () => {
             <span> </span>
             <button type = "button" class="btn btn-danger px-4 btn-lg" onClick = {stopMelody}>Stop</button>
             <span>   </span>
-            {/* <button type = "button" class="btn btn-primary px-4 btn-lg" onClick = {generateChords}>Generate Chords</button> */}
+            <div class="slidecontainer">
+                <div>BPM:</div>
+                <input type = "range" min = "60" max = "200" class="slider" defaultValue='100' id="myRange" onChange={event=>setBPM(event.target.value)}></input>
+                <div>{BPM}</div>
+            </div>
         </div>
     )
 }

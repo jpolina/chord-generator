@@ -24,7 +24,6 @@ function Key(props, setNote, signal) {
             setButtonColor("#D9E3F0")
             setTextColor('black')
         }
-        console.log(props.signal)
     }, [props.signal])
 
     let buttonStyle = {
