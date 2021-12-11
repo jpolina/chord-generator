@@ -24,8 +24,10 @@ const IVChord1 = ["F3", "A3"]
 const IVChord2 = ["C4", "A3"]
 const IVbChord1 = ["A2", "C3"]
 const IVbChord2 = ["F3", "C3"]
-const VChord1 = ["B2", "D3"]
-const VChord2 = ["G3", "D3"]
+const VChord1 = ["G2", "D3"]
+const VChord2 = ["F3", "D3"]
+const VbChord1 = ["B2", "D3"]
+const VbChord2 = ["G3", "D3"]
 const iiChord1 = ["D3","F3"]
 const iiChord2 = ["A3","F3"]
 const viChord1 = ["A2","C3"]
@@ -119,7 +121,7 @@ const Grid = () => {
                 default:
                 case 'C':
                     randomInt = getRandomInt(4);
-                    if (prev=="G/B") {
+                    if (prev=="G") {
                         output.push(IChord1);
                         output.push(IChord2);
                         setChordArray(chordArray=>[...chordArray,"C"])
@@ -150,11 +152,20 @@ const Grid = () => {
                     break;
                 case 'D':
                 case 'B':
-                    output.push(VChord1);
-                    output.push(VChord2);
-                    setChordArray(chordArray=>[...chordArray,"G/B"])
-                    setChordArray(chordArray=>[...chordArray,"G/B"])
-                    prev="G/B";
+                    randomInt = getRandomInt(2);
+                    if (randomInt===0){
+                        output.push(VbChord1);
+                        output.push(VbChord2);
+                        setChordArray(chordArray=>[...chordArray,"G/B"])
+                        setChordArray(chordArray=>[...chordArray,"G/B"])
+                        prev="G";
+                    } else if (randomInt===1){
+                        output.push(VChord1);
+                        output.push(VChord2);
+                        setChordArray(chordArray=>[...chordArray,"G"])
+                        setChordArray(chordArray=>[...chordArray,"G"])
+                        prev="G";
+                    }
                     break;
                 case 'E':
                     randomInt = getRandomInt(2);
@@ -190,18 +201,24 @@ const Grid = () => {
                     }
                     break;
                 case 'G':
-                    
+                    randomInt = getRandomInt(2)
                     if (beat2=="C"||beat2=="E") {
                         output.push(IChord1);
                         output.push(IChord2);
                         setChordArray(chordArray=>[...chordArray,"C"])
                         setChordArray(chordArray=>[...chordArray,"C"])
-                    } else{
+                    } else if (randomInt==0){
                         output.push(VChord1);
                         output.push(VChord2);
+                        setChordArray(chordArray=>[...chordArray,"G"])
+                        setChordArray(chordArray=>[...chordArray,"G"])
+                        prev="G"
+                    } else if (randomInt==1){
+                        output.push(VbChord1);
+                        output.push(VbChord2);
                         setChordArray(chordArray=>[...chordArray,"G/B"])
                         setChordArray(chordArray=>[...chordArray,"G/B"])
-                        prev="G/B"
+                        prev="G"
                     }
                     break;
                 case 'A':
@@ -293,9 +310,9 @@ const Grid = () => {
                     <Column class="grid-item1" pushNote={pushNote16} beat={16}/>
                 </BeatContext.Provider>
             </div>
-            <button type = "button" class="btn btn-success play playstop" onClick = {()=>{playMelody(); toggle()}}>Play</button>
-            <button type = "button" class="btn btn-danger stop playstop" onClick = {()=>{stopMelody();reset()}}>Stop</button>
-            <div class="slidecontainer">
+            <button type = "button" class="btn btn-success play playstop shadow p-3 mb-3" onClick = {()=>{playMelody(); toggle()}}>Play</button>
+            <button type = "button" class="btn btn-danger stop playstop shadow p-3 mb-3" onClick = {()=>{stopMelody();reset()}}>Stop</button>
+            <div class="slidecontainer shadow p-3 mb-5 rounded">
                 <div>BPM: {BPM}</div>
                 <input type = "range" min = "60" max = "200" class="slider" defaultValue='100' id="myRange" onChange={event=>setBPM(event.target.value)} disabled={isActive}></input>
             </div>
