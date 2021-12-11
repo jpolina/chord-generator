@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import * as Tone from "tone";
 import Grid from './components/Grid'

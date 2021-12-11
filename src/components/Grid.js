@@ -315,7 +315,7 @@ const Grid = () => {
                     <Column class="grid-item1" pushNote={pushNote16} beat={16}/>
                 </BeatContext.Provider>
             </div>
-            <button type = "button" class="btn btn-light playButton shadow mb-4 mt-2" onClick = {()=>{if (!isActive) {playMelody(); toggle()} else{reset();stopMelody() }}}><strong>Play/Stop</strong></button>
+            <button type = "button" class="btn btn-primary playButton shadow mb-4 mt-2" onClick = {()=>{if (!isActive) {playMelody(); toggle()} else{reset();stopMelody() }}}><strong>Play/Stop</strong></button>
             <div class="slidecontainer shadow p-3 rounded">
                 <span class = 'bpmDisplay'><strong>BPM: </strong></span>
                 <input type = "range" min = "60" max = "200" class="slider" defaultValue='100' id="myRange" onChange={event=>setBPM(event.target.value)} disabled={isActive}></input>
