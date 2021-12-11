@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import * as Tone from "tone";
 import "./Key.css"
 
-let dark = false;
 const synth = new Tone.PolySynth().toDestination();
 function Key(props, setNote, signal) {
     const [buttonColor, setButtonColor] = useState("");
@@ -18,7 +17,7 @@ function Key(props, setNote, signal) {
     }
     
     useEffect(()=>{
-        if (props.children==props.signal){
+        if (props.children===props.signal){
             setButtonColor("#697689")
             setTextColor('white')
         } else {
