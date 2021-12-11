@@ -1,10 +1,49 @@
 .myGrid {
 }
 
+.rectangle {
+  fill:0A1128;
+  stroke-width:3;
+  width:100vw;
+  height:100px;
+  background-Color:rgb(20, 33, 61);
+}
+
+.centerTitle{
+  color: rgb(229, 229, 229);
+  padding: 12px;
+  text-align: center;
+}
 .center {
   margin: auto;
   width: 672px;
-  padding: 20px;
+  padding-bottom: 40px;
+
+}
+
+.rectangle1 {
+  border-radius:9px;
+  background-color: rgb(229, 229, 229);
+  width: 672px;
+  height:250px;
+}
+
+.text {
+  color: rgb(20, 33, 61);
+  padding-left:20px;
+
+}
+
+.title {
+  font-size:33px;
+  padding-top: 11px;
+
+}
+
+.instructions {
+  font-size:1.1rem;
+  padding-top: 11px;
+
 }
 
 /* .App {

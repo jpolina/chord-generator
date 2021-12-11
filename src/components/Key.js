@@ -18,10 +18,10 @@ function Key(props, setNote, signal) {
     
     useEffect(()=>{
         if (props.children===props.signal){
-            setButtonColor("#697689")
+            setButtonColor("rgb(20, 33, 61)")
             setTextColor('white')
         } else {
-            setButtonColor("#D9E3F0")
+            setButtonColor("rgb(229, 229, 229)")
             setTextColor('black')
         }
     }, [props.signal])

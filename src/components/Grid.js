@@ -67,10 +67,12 @@ const Grid = () => {
     const generateChords = () =>{
         let noteArray = [note1,note2,note3, note4, note5, note6, note7, note8, note9, note10, note11, note12, note13, note14, note15, note16]
         let output = [];
+        let prev = "";
         setChordArray([])
         for (let i=0;i<16;i+=2) {
             let beat1 = noteArray[i].charAt(0);
             let beat2 = noteArray[i+1].charAt(0);
+            
             // Determine which chord fits best with the notes
             // 1: I, vi, IV
             // 2: V, ii, 
@@ -84,11 +86,12 @@ const Grid = () => {
                 default:
                 case 'C':
                     randomInt = getRandomInt(4);
-                    if (chordArray.length>0 && chordArray[i-2]=="G/B") {
+                    if (prev=="G/B") {
                         output.push(IChord1);
                         output.push(IChord2);
                         setChordArray(chordArray=>[...chordArray,"C"])
                         setChordArray(chordArray=>[...chordArray,"C"])
+                        prev="";
 
                     } else if (randomInt===0){
                         output.push(viChord1);
@@ -118,7 +121,7 @@ const Grid = () => {
                     output.push(VChord2);
                     setChordArray(chordArray=>[...chordArray,"G/B"])
                     setChordArray(chordArray=>[...chordArray,"G/B"])
-
+                    prev="G/B";
                     break;
                 case 'E':
                     randomInt = getRandomInt(2);
@@ -154,17 +157,18 @@ const Grid = () => {
                     }
                     break;
                 case 'G':
-                    randomInt=getRandomInt(2)
-                    if (randomInt==0) {
+                    
+                    if (beat2=="C"||beat2=="E") {
                         output.push(IChord1);
                         output.push(IChord2);
                         setChordArray(chordArray=>[...chordArray,"C"])
                         setChordArray(chordArray=>[...chordArray,"C"])
-                    } else if (randomInt==1){
+                    } else{
                         output.push(VChord1);
                         output.push(VChord2);
                         setChordArray(chordArray=>[...chordArray,"G/B"])
                         setChordArray(chordArray=>[...chordArray,"G/B"])
+                        prev="G/B"
                     }
                     break;
                 case 'A':
@@ -218,24 +222,6 @@ const Grid = () => {
 
     return (
         <div>
-            <div class="grid-container1">
-                <Column class="grid-item1" pushNote={pushNote1}/>
-                <Column class="grid-item1" pushNote={pushNote2}/>
-                <Column class="grid-item1" pushNote={pushNote3}/>
-                <Column class="grid-item1" pushNote={pushNote4}/>
-                <Column class="grid-item1" pushNote={pushNote5}/>
-                <Column class="grid-item1" pushNote={pushNote6}/>
-                <Column class="grid-item1" pushNote={pushNote7}/>
-                <Column class="grid-item1" pushNote={pushNote8}/>
-                <Column class="grid-item1" pushNote={pushNote9}/>
-                <Column class="grid-item1" pushNote={pushNote10}/>
-                <Column class="grid-item1" pushNote={pushNote11}/>
-                <Column class="grid-item1" pushNote={pushNote12}/>
-                <Column class="grid-item1" pushNote={pushNote13}/>
-                <Column class="grid-item1" pushNote={pushNote14}/>
-                <Column class="grid-item1" pushNote={pushNote15}/>
-                <Column class="grid-item1" pushNote={pushNote16}/>
-            </div>
             <div class="grid-container2">
                 <div class='grid-item2'>{chordArray[0]}</div>
                 <div class='grid-item2'>{chordArray[1]}</div>
@@ -254,14 +240,29 @@ const Grid = () => {
                 <div class='grid-item2'>{chordArray[14]}</div>
                 <div class='grid-item2'>{chordArray[15]}</div>
             </div>
-            <button type = "button" class="btn btn-success px-4 btn-lg" onClick = {playMelody}>Play</button>
-            <span> </span>
-            <button type = "button" class="btn btn-danger px-4 btn-lg" onClick = {stopMelody}>Stop</button>
-            <span>   </span>
+            <div class="grid-container1">
+                <Column class="grid-item1" pushNote={pushNote1}/>
+                <Column class="grid-item1" pushNote={pushNote2}/>
+                <Column class="grid-item1" pushNote={pushNote3}/>
+                <Column class="grid-item1" pushNote={pushNote4}/>
+                <Column class="grid-item1" pushNote={pushNote5}/>
+                <Column class="grid-item1" pushNote={pushNote6}/>
+                <Column class="grid-item1" pushNote={pushNote7}/>
+                <Column class="grid-item1" pushNote={pushNote8}/>
+                <Column class="grid-item1" pushNote={pushNote9}/>
+                <Column class="grid-item1" pushNote={pushNote10}/>
+                <Column class="grid-item1" pushNote={pushNote11}/>
+                <Column class="grid-item1" pushNote={pushNote12}/>
+                <Column class="grid-item1" pushNote={pushNote13}/>
+                <Column class="grid-item1" pushNote={pushNote14}/>
+                <Column class="grid-item1" pushNote={pushNote15}/>
+                <Column class="grid-item1" pushNote={pushNote16}/>
+            </div>
+            <button type = "button" class="btn btn-success playstop" onClick = {playMelody}>Play</button>
+            <button type = "button" class="btn btn-danger playstop" onClick = {stopMelody}>Stop</button>
             <div class="slidecontainer">
-                <div>BPM:</div>
+                <div>BPM: {BPM}</div>
                 <input type = "range" min = "60" max = "200" class="slider" defaultValue='100' id="myRange" onChange={event=>setBPM(event.target.value)}></input>
-                <div>{BPM}</div>
             </div>
         </div>
     )
