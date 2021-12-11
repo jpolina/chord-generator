@@ -24,8 +24,8 @@ const IVChord1 = ["F3", "A3"]
 const IVChord2 = ["C4", "A3"]
 const IVbChord1 = ["A2", "C3"]
 const IVbChord2 = ["F3", "C3"]
-const VChord1 = ["G2", "D3"]
-const VChord2 = ["F3", "D3"]
+const VChord1 = ["G2", "B2"]
+const VChord2 = ["D3", "B2"]
 const VbChord1 = ["B2", "D3"]
 const VbChord2 = ["G3", "D3"]
 const iiChord1 = ["D3","F3"]
@@ -120,7 +120,7 @@ const Grid = () => {
             switch(beat1) {
                 default:
                 case 'C':
-                    randomInt = getRandomInt(4);
+                    randomInt = getRandomInt(5);
                     if (prev=="G") {
                         output.push(IChord1);
                         output.push(IChord2);
@@ -148,6 +148,11 @@ const Grid = () => {
                         output.push(IVbChord2);
                         setChordArray(chordArray=>[...chordArray,"F/A"])
                         setChordArray(chordArray=>[...chordArray,"F/A"])
+                    } else if (randomInt===4) {
+                        output.push(IChord1);
+                        output.push(IChord2);
+                        setChordArray(chordArray=>[...chordArray,"C"])
+                        setChordArray(chordArray=>[...chordArray,"C"])
                     }
                     break;
                 case 'D':
@@ -310,11 +315,11 @@ const Grid = () => {
                     <Column class="grid-item1" pushNote={pushNote16} beat={16}/>
                 </BeatContext.Provider>
             </div>
-            <button type = "button" class="btn btn-success play playstop shadow p-3 mb-3" onClick = {()=>{playMelody(); toggle()}}>Play</button>
-            <button type = "button" class="btn btn-danger stop playstop shadow p-3 mb-3" onClick = {()=>{stopMelody();reset()}}>Stop</button>
-            <div class="slidecontainer shadow p-3 mb-5 rounded">
-                <div>BPM: {BPM}</div>
+            <button type = "button" class="btn btn-light playButton shadow mb-4 mt-2" onClick = {()=>{if (!isActive) {playMelody(); toggle()} else{reset();stopMelody() }}}><strong>Play/Stop</strong></button>
+            <div class="slidecontainer shadow p-3 rounded">
+                <span class = 'bpmDisplay'><strong>BPM: </strong></span>
                 <input type = "range" min = "60" max = "200" class="slider" defaultValue='100' id="myRange" onChange={event=>setBPM(event.target.value)} disabled={isActive}></input>
+                <span class = 'bpmDisplay'><strong>{BPM}</strong></span>
             </div>
         </div>
     )

@@ -1,6 +1,14 @@
 .myGrid {
 }
 
+.name {
+  color:rgb(252, 163, 17);
+}
+
+.description {
+  font-size:1.7rem;
+}
+
 .rectangle {
   fill:0A1128;
   stroke-width:3;
@@ -25,26 +33,27 @@
 
 .rectangle1 {
   border-radius:9px;
-  background-color: rgb(229, 229, 229);
+  background-color: rgb(20, 33, 61);
   width: 672px;
   height:250px;
 }
 
 .text {
-  color: rgb(20, 33, 61);
-  padding-left:20px;
+  color: rgb(252, 163, 17);
+  padding-left:0px;
 
 }
 
 .title {
   font-size:33px;
-  padding-top: 11px;
+  padding-top: 0px;
+  padding-left:14px;
 
 }
 
 .instructions {
-  font-size:1.1rem;
-  padding-top: 11px;
+  font-size:1.15rem;
+  padding-top: 2px;
 
 }
 
