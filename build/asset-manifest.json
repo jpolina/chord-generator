@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/chord-generator/static/css/main.7b731a2f.chunk.css",
+    "main.js": "/chord-generator/static/js/main.82915c29.chunk.js",
+    "main.js.map": "/chord-generator/static/js/main.82915c29.chunk.js.map",
+    "runtime-main.js": "/chord-generator/static/js/runtime-main.32d261a8.js",
+    "runtime-main.js.map": "/chord-generator/static/js/runtime-main.32d261a8.js.map",
+    "static/css/2.8c0e6b67.chunk.css": "/chord-generator/static/css/2.8c0e6b67.chunk.css",
+    "static/js/2.10453833.chunk.js": "/chord-generator/static/js/2.10453833.chunk.js",
+    "static/js/2.10453833.chunk.js.map": "/chord-generator/static/js/2.10453833.chunk.js.map",
+    "static/js/3.68c7485b.chunk.js": "/chord-generator/static/js/3.68c7485b.chunk.js",
+    "static/js/3.68c7485b.chunk.js.map": "/chord-generator/static/js/3.68c7485b.chunk.js.map",
+    "index.html": "/chord-generator/index.html",
+    "static/css/2.8c0e6b67.chunk.css.map": "/chord-generator/static/css/2.8c0e6b67.chunk.css.map",
+    "static/css/main.7b731a2f.chunk.css.map": "/chord-generator/static/css/main.7b731a2f.chunk.css.map",
+    "static/js/2.10453833.chunk.js.LICENSE.txt": "/chord-generator/static/js/2.10453833.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.32d261a8.js",
+    "static/css/2.8c0e6b67.chunk.css",
+    "static/js/2.10453833.chunk.js",
+    "static/css/main.7b731a2f.chunk.css",
+    "static/js/main.82915c29.chunk.js"
+  ]
+}

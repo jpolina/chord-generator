@@ -21,7 +21,7 @@ function App() {
         <Grid/>
       </div>
       <div class = 'center rectangle1 shadow p-3 mb-5'>
-        <h1 class = "text title"><u><strong>How to use</strong></u></h1>
+        <h1 class = "text title"><u><strong>How to use it</strong></u></h1>
         <p class = "text instructions">
           <ol>
             <li>Enter a melody in the key of C major into the grid above.</li>
