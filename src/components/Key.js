@@ -1,9 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import * as Tone from "tone";
 import "./Key.css"
+import {BeatContext} from './BeatContext'
 
 const synth = new Tone.PolySynth().toDestination();
-function Key(props, setNote, signal) {
+
+function Key(props, setNote, signal, beat) {
+    let currentBeat = useContext(BeatContext);
     const [buttonColor, setButtonColor] = useState("");
     const [textColor, setTextColor] = useState("");
 
@@ -14,7 +17,7 @@ function Key(props, setNote, signal) {
         } else {
             props.setNote("0")
         }
-    }
+    } 
     
     useEffect(()=>{
         if (props.children===props.signal){
@@ -26,6 +29,17 @@ function Key(props, setNote, signal) {
         }
     }, [props.signal])
 
+    useEffect(()=>{
+        if (props.children==props.signal){
+            if (currentBeat==props.beat){
+                setButtonColor("rgb(252, 163, 17)")
+                setTextColor("black")
+            } else {
+                setButtonColor("rgb(20, 33, 61)")
+                setTextColor('white')
+            }
+        }
+    },[currentBeat])
     let buttonStyle = {
         backgroundColor:buttonColor,
         color:textColor

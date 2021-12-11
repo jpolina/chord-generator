@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import Column from './Column'
 import * as Tone from "tone";
 import './Grid.css'
@@ -6,12 +6,16 @@ import Popper, { createPopper} from '@popperjs/core';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
-import $ from 'jquery';
+import {BeatContext} from './BeatContext'
 
+
+//Create synths and BPM
 const synth = new Tone.Synth().toDestination()
 const chordPlayer = new Tone.Synth().toDestination()
 Tone.Transport.bpm.value = 100;
 
+
+//Create the chords
 const IChord1 = ["C3","E3"];
 const IChord2 = ["G3","E3"];
 const IbChord1 = ["E3", "G3"]
@@ -29,16 +33,16 @@ const viChord2 = ["E3","C3"]
 const iiiChord1 = ["E3", "G3"]
 const iiiChord2 = ["B3", "G3"]
 
+// Select random number
 let randomInt;
-
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
-
 const selectRandom = (number) => {
     return number[Math.floor(Math.random()*number)];
 }
 
+//The grid or "piano roll"
 const Grid = () => {
     const [note1, pushNote1] = useState();
     const [note2, pushNote2] = useState();
@@ -63,6 +67,35 @@ const Grid = () => {
         Tone.Transport.bpm.value = BPM/2;
     }, [BPM])
 
+
+    //Parallel timer
+    const [currentBeat, setCurrentBeat] = useState(1);
+    const [isActive, setIsActive] = useState(false);
+    const toggle =()=> {
+        setIsActive(true);
+        setCurrentBeat(1);
+    }
+    const reset = () => {
+        setCurrentBeat(0)
+        setIsActive(false)
+    }
+    useEffect(() => {
+        let interval = null;
+        if (isActive) {
+          interval = setInterval(() => {
+            setCurrentBeat(currentBeat => currentBeat + 1);
+          }, 60/BPM*1000);
+        } else if (!isActive && currentBeat !== 0) {
+          clearInterval(interval);
+        }
+        return () => clearInterval(interval);
+      }, [isActive, 60/BPM]);
+
+    useEffect(()=> {
+        if (currentBeat>16) {
+            setCurrentBeat(1)
+        }
+    },[currentBeat])
 
     const generateChords = () =>{
         let noteArray = [note1,note2,note3, note4, note5, note6, note7, note8, note9, note10, note11, note12, note13, note14, note15, note16]
@@ -223,46 +256,48 @@ const Grid = () => {
     return (
         <div>
             <div class="grid-container2">
-                <div class='grid-item2'>{chordArray[0]}</div>
-                <div class='grid-item2'>{chordArray[1]}</div>
-                <div class='grid-item2'>{chordArray[2]}</div>
-                <div class='grid-item2'>{chordArray[3]}</div>
-                <div class='grid-item2'>{chordArray[4]}</div>
-                <div class='grid-item2'>{chordArray[5]}</div>
-                <div class='grid-item2'>{chordArray[6]}</div>
-                <div class='grid-item2'>{chordArray[7]}</div>
-                <div class='grid-item2'>{chordArray[8]}</div>
-                <div class='grid-item2'>{chordArray[9]}</div>
-                <div class='grid-item2'>{chordArray[10]}</div>
-                <div class='grid-item2'>{chordArray[11]}</div>
-                <div class='grid-item2'>{chordArray[12]}</div>
-                <div class='grid-item2'>{chordArray[13]}</div>
-                <div class='grid-item2'>{chordArray[14]}</div>
-                <div class='grid-item2'>{chordArray[15]}</div>
+                    <div class='grid-item2'>{chordArray[0]}</div>
+                    <div class='grid-item2'>{chordArray[1]}</div>
+                    <div class='grid-item2'>{chordArray[2]}</div>
+                    <div class='grid-item2'>{chordArray[3]}</div>
+                    <div class='grid-item2'>{chordArray[4]}</div>
+                    <div class='grid-item2'>{chordArray[5]}</div>
+                    <div class='grid-item2'>{chordArray[6]}</div>
+                    <div class='grid-item2'>{chordArray[7]}</div>
+                    <div class='grid-item2'>{chordArray[8]}</div>
+                    <div class='grid-item2'>{chordArray[9]}</div>
+                    <div class='grid-item2'>{chordArray[10]}</div>
+                    <div class='grid-item2'>{chordArray[11]}</div>
+                    <div class='grid-item2'>{chordArray[12]}</div>
+                    <div class='grid-item2'>{chordArray[13]}</div>
+                    <div class='grid-item2'>{chordArray[14]}</div>
+                    <div class='grid-item2'>{chordArray[15]}</div>
             </div>
             <div class="grid-container1">
-                <Column class="grid-item1" pushNote={pushNote1}/>
-                <Column class="grid-item1" pushNote={pushNote2}/>
-                <Column class="grid-item1" pushNote={pushNote3}/>
-                <Column class="grid-item1" pushNote={pushNote4}/>
-                <Column class="grid-item1" pushNote={pushNote5}/>
-                <Column class="grid-item1" pushNote={pushNote6}/>
-                <Column class="grid-item1" pushNote={pushNote7}/>
-                <Column class="grid-item1" pushNote={pushNote8}/>
-                <Column class="grid-item1" pushNote={pushNote9}/>
-                <Column class="grid-item1" pushNote={pushNote10}/>
-                <Column class="grid-item1" pushNote={pushNote11}/>
-                <Column class="grid-item1" pushNote={pushNote12}/>
-                <Column class="grid-item1" pushNote={pushNote13}/>
-                <Column class="grid-item1" pushNote={pushNote14}/>
-                <Column class="grid-item1" pushNote={pushNote15}/>
-                <Column class="grid-item1" pushNote={pushNote16}/>
+                <BeatContext.Provider value={currentBeat}>
+                    <Column class="grid-item1" pushNote={pushNote1} beat={1}/>
+                    <Column class="grid-item1" pushNote={pushNote2} beat={2}/>
+                    <Column class="grid-item1" pushNote={pushNote3} beat={3}/>
+                    <Column class="grid-item1" pushNote={pushNote4} beat={4}/>
+                    <Column class="grid-item1" pushNote={pushNote5} beat={5}/>
+                    <Column class="grid-item1" pushNote={pushNote6} beat={6}/>
+                    <Column class="grid-item1" pushNote={pushNote7} beat={7}/>
+                    <Column class="grid-item1" pushNote={pushNote8} beat={8}/>
+                    <Column class="grid-item1" pushNote={pushNote9} beat={9}/>
+                    <Column class="grid-item1" pushNote={pushNote10} beat={10}/>
+                    <Column class="grid-item1" pushNote={pushNote11} beat={11}/>
+                    <Column class="grid-item1" pushNote={pushNote12} beat={12}/>
+                    <Column class="grid-item1" pushNote={pushNote13} beat={13}/>
+                    <Column class="grid-item1" pushNote={pushNote14} beat={14}/>
+                    <Column class="grid-item1" pushNote={pushNote15} beat={15}/>
+                    <Column class="grid-item1" pushNote={pushNote16} beat={16}/>
+                </BeatContext.Provider>
             </div>
-            <button type = "button" class="btn btn-success playstop" onClick = {playMelody}>Play</button>
-            <button type = "button" class="btn btn-danger playstop" onClick = {stopMelody}>Stop</button>
+            <button type = "button" class="btn btn-success play playstop" onClick = {()=>{playMelody(); toggle()}}>Play</button>
+            <button type = "button" class="btn btn-danger stop playstop" onClick = {()=>{stopMelody();reset()}}>Stop</button>
             <div class="slidecontainer">
                 <div>BPM: {BPM}</div>
-                <input type = "range" min = "60" max = "200" class="slider" defaultValue='100' id="myRange" onChange={event=>setBPM(event.target.value)}></input>
+                <input type = "range" min = "60" max = "200" class="slider" defaultValue='100' id="myRange" onChange={event=>setBPM(event.target.value)} disabled={isActive}></input>
             </div>
         </div>
     )
