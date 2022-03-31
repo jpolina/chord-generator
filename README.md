@@ -1,4 +1,4 @@
-A chord progression generator which creates and plays chords for any melody of your choice!
+A chord progression generator that creates and plays chords for any melody of your choice!
 
 To try it out, go [here](https://jpolina.github.io/chord-generator/)
 
