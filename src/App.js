@@ -12,7 +12,7 @@ function App() {
           <div>
             <h1 class = 'centerTitle d-print-inline name'>
               <span class = "name"><strong>Chordial</strong></span>
-              <span class = "description"> - a Chord Generator by Jonathan Polina</span>
+              <span class = "description"> - a Chord Progression Generator by Jonathan Polina</span>
             </h1>
           </div>
         </div>
@@ -26,9 +26,9 @@ function App() {
           <ol>
             <li>Enter a melody in the key of C major into the grid above.</li>
             <li>Click the Play button.</li>
-            <li>Chords which fit the melody will be generated and played.</li>
-            <li>Clicking the Play button again will stop the music.</li>
-            <li>Clicking the Play button again will generate and play a new set of chords.</li>
+            <li>A chord progression that fits the melody will be generated and played.</li>
+            <li>Click the Play button again to stop the music.</li>
+            <li>Click the Play button again to generate and play a new chord progression.</li>
             <li>Enjoy!</li>
           </ol>
         </p>
