@@ -12,6 +12,9 @@ const Column = (props, pushNote, beat) => {
     return (
         <div>
             <div class = "grid-container">
+                {/* the setNote function is drilled down to be used by Keys, which will call setNote when they are clicked to let the Grid know they were chosen*/}
+                {/* the signal is a number 0-16 (1-16 if currently playing) drilled down from the grid, to let the keys know the active beat we're on when playing */}
+                {/* the beat prop tells keys which beat they are */}
                 <Key class="grid-item" setNote={setNote} signal = {signal} beat={props.beat}>C6</Key>
                 <Key class="grid-item" setNote={setNote} signal = {signal} beat={props.beat}>B5</Key>
                 <Key class="grid-item" setNote={setNote} signal = {signal} beat={props.beat}>A5</Key>

@@ -278,25 +278,26 @@ const Grid = () => {
     return (
         <div>
             <div class="grid-container2">
-                    <div class='grid-item2'>{chordArray[0]}</div>
-                    <div class='grid-item2'>{chordArray[1]}</div>
-                    <div class='grid-item2'>{chordArray[2]}</div>
-                    <div class='grid-item2'>{chordArray[3]}</div>
-                    <div class='grid-item2'>{chordArray[4]}</div>
-                    <div class='grid-item2'>{chordArray[5]}</div>
-                    <div class='grid-item2'>{chordArray[6]}</div>
-                    <div class='grid-item2'>{chordArray[7]}</div>
-                    <div class='grid-item2'>{chordArray[8]}</div>
-                    <div class='grid-item2'>{chordArray[9]}</div>
-                    <div class='grid-item2'>{chordArray[10]}</div>
-                    <div class='grid-item2'>{chordArray[11]}</div>
-                    <div class='grid-item2'>{chordArray[12]}</div>
-                    <div class='grid-item2'>{chordArray[13]}</div>
-                    <div class='grid-item2'>{chordArray[14]}</div>
-                    <div class='grid-item2'>{chordArray[15]}</div>
+                <div class='grid-item2'>{chordArray[0]}</div>
+                <div class='grid-item2'>{chordArray[1]}</div>
+                <div class='grid-item2'>{chordArray[2]}</div>
+                <div class='grid-item2'>{chordArray[3]}</div>
+                <div class='grid-item2'>{chordArray[4]}</div>
+                <div class='grid-item2'>{chordArray[5]}</div>
+                <div class='grid-item2'>{chordArray[6]}</div>
+                <div class='grid-item2'>{chordArray[7]}</div>
+                <div class='grid-item2'>{chordArray[8]}</div>
+                <div class='grid-item2'>{chordArray[9]}</div>
+                <div class='grid-item2'>{chordArray[10]}</div>
+                <div class='grid-item2'>{chordArray[11]}</div>
+                <div class='grid-item2'>{chordArray[12]}</div>
+                <div class='grid-item2'>{chordArray[13]}</div>
+                <div class='grid-item2'>{chordArray[14]}</div>
+                <div class='grid-item2'>{chordArray[15]}</div>
             </div>
             <div class="grid-container1">
                 <BeatContext.Provider value={currentBeat}>
+                    {/* Each column gets a pushNote function to give to its Keys */}
                     <Column class="grid-item1" pushNote={pushNote1} beat={1}/>
                     <Column class="grid-item1" pushNote={pushNote2} beat={2}/>
                     <Column class="grid-item1" pushNote={pushNote3} beat={3}/>
