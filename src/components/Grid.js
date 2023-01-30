@@ -40,9 +40,6 @@ let randomInt;
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
-const selectRandom = (number) => {
-    return number[Math.floor(Math.random()*number)];
-}
 
 //The grid or "piano roll"
 const Grid = () => {
