@@ -59,6 +59,7 @@ const Grid = () => {
     const [note14, pushNote14] = useState();
     const [note15, pushNote15] = useState();
     const [note16, pushNote16] = useState();
+    const pushNoteArray=[pushNote1, pushNote2, pushNote3, pushNote4, pushNote5, pushNote6, pushNote7, pushNote8, pushNote9, pushNote10, pushNote11, pushNote12, pushNote13, pushNote14, pushNote15, pushNote16];
 
     const [chordArray, setChordArray] = useState([]);
     const [BPM, setBPM] = useState(100);
@@ -295,7 +296,8 @@ const Grid = () => {
             <div class="grid-container1">
                 <BeatContext.Provider value={currentBeat}>
                     {/* Each column gets a pushNote function to give to its Keys */}
-                    <Column class="grid-item1" pushNote={pushNote1} beat={1}/>
+                    {pushNoteArray.map((pushNote, index) => <Column className="grid-item1" pushNote={pushNote} beat={index + 1} key={index + 1}/>)}
+                    {/* <Column class="grid-item1" pushNote={pushNote1} beat={1}/>
                     <Column class="grid-item1" pushNote={pushNote2} beat={2}/>
                     <Column class="grid-item1" pushNote={pushNote3} beat={3}/>
                     <Column class="grid-item1" pushNote={pushNote4} beat={4}/>
@@ -310,7 +312,7 @@ const Grid = () => {
                     <Column class="grid-item1" pushNote={pushNote13} beat={13}/>
                     <Column class="grid-item1" pushNote={pushNote14} beat={14}/>
                     <Column class="grid-item1" pushNote={pushNote15} beat={15}/>
-                    <Column class="grid-item1" pushNote={pushNote16} beat={16}/>
+                    <Column class="grid-item1" pushNote={pushNote16} beat={16}/> */}
                 </BeatContext.Provider>
             </div>
             <button type = "button" class="btn btn-primary playButton shadow mb-4 mt-2" onClick = {()=>{if (!isActive) {playMelody(); toggle()} else{reset();stopMelody() }}}><strong>Play/Stop</strong></button>
